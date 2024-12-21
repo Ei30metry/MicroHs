@@ -7,11 +7,11 @@ import Control.Exception
 import MicroHs.Compile
 import MicroHs.CompileCache
 import MicroHs.Desugar(LDef)
-import MicroHs.Expr(EType, showEType)
+import Language.MicroHs.Expr(EType, showEType)
 import MicroHs.Flags
-import MicroHs.Ident(mkIdent, Ident, unIdent, isIdentChar)
+import Language.MicroHs.Ident(mkIdent, Ident, unIdent, isIdentChar)
 import MicroHs.List
-import MicroHs.Parse
+import Language.MicroHs.Parse
 import MicroHs.StateIO
 import MicroHs.SymTab(Entry(..), stEmpty, stKeysGlbU)
 import MicroHs.Translate

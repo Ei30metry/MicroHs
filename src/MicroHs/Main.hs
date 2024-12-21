@@ -15,8 +15,8 @@ import MicroHs.CompileCache
 import MicroHs.ExpPrint
 import MicroHs.FFI
 import MicroHs.Flags
-import MicroHs.Ident
-import MicroHs.Lex(readInt)
+import Language.MicroHs.Ident
+import Language.MicroHs.Lex(readInt)
 import MicroHs.List
 import MicroHs.Package
 import MicroHs.Translate
@@ -107,7 +107,7 @@ readTargets :: Flags -> FilePath -> IO [Target]
 readTargets flags dir = do
   let tgFilePath = dir </> "targets.conf"
   exists <- doesFileExist tgFilePath
-  if not exists 
+  if not exists
      then return []
      else do
        tgFile <- readFile tgFilePath
@@ -119,7 +119,7 @@ readTargets flags dir = do
            return []
          Right tgs -> do
            when (verbose flags > 0) $
-             putStrLn $ "Read targets file. Possible targets: " ++ show 
+             putStrLn $ "Read targets file. Possible targets: " ++ show
                [tg | Target tg _ <- tgs]
            return tgs
 
@@ -134,7 +134,7 @@ readTarget flags dir = do
       when (verbose flags > 0) $
         putStrLn $ unwords ["Could not find", target flags, "in file"]
       return TTarget { tName = "default"
-                     , tCC   = fromMaybe "cc" compiler 
+                     , tCC   = fromMaybe "cc" compiler
                      , tConf = fromMaybe dConf conf
                      }
     Just (Target n cs) -> do
@@ -168,7 +168,7 @@ mainBuildPkg flags namever amns = do
   writeSerializedCompressed (output flags) pkg
   t2 <- getTimeMilli
   when (verbose flags > 0) $
-    putStrLn $ "Compression time " ++ show (t2 - t1) ++ " ms"  
+    putStrLn $ "Compression time " ++ show (t2 - t1) ++ " ms"
 
 splitNameVer :: String -> (String, Version)
 splitNameVer s =

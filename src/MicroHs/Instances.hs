@@ -4,9 +4,9 @@ module MicroHs.Instances(compiledWithGHC) where
 -- For GHC compatibility
 import Prelude(); import MHSPrelude
 import MicroHs.CompileCache
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import MicroHs.Exp
-import MicroHs.Expr
+import Language.MicroHs.Expr
 import Compat
 
 compiledWithGHC :: Bool

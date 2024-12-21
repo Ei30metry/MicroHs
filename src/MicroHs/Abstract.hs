@@ -3,9 +3,9 @@ module MicroHs.Abstract(
   -- reduce,
   ) where
 import Prelude(); import MHSPrelude
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import MicroHs.Exp
-import MicroHs.Expr(Lit(..))
+import Language.MicroHs.Expr(Lit(..))
 
 --
 -- Used combinators
@@ -293,7 +293,7 @@ improveT ae =
                   def
               NotApp -> def
 -}
-            
+
 
 kApp :: Exp -> Exp -> Exp
 kApp (Lit (LPrim "K")) (App (Lit (LPrim ('K':s))) x)

@@ -53,7 +53,7 @@ import Prelude(); import MHSPrelude hiding ((<>))
 import Control.Arrow(first)
 import Data.List
 import Data.Maybe
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import Text.PrettyPrint.HughesPJLite
 import GHC.Stack
 

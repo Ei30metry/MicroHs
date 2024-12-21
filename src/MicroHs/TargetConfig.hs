@@ -9,8 +9,8 @@ import Prelude(); import MHSPrelude hiding(lex)
 import Control.Applicative
 import Data.List
 import Text.ParserComb
-import MicroHs.Ident
-import MicroHs.Lex
+import Language.MicroHs.Ident
+import Language.MicroHs.Lex
 
 {- File Format
 [target_name]

@@ -8,10 +8,10 @@ import Control.Monad
 import Data.Char
 import Data.List
 import Text.ParserComb as P
-import MicroHs.Lex
-import MicroHs.Expr hiding (getSLoc)
-import qualified MicroHs.Expr as E
-import MicroHs.Ident
+import Language.MicroHs.Lex
+import Language.MicroHs.Expr hiding (getSLoc)
+import qualified Language.MicroHs.Expr as E
+import Language.MicroHs.Ident
 --import Debug.Trace
 
 type P a = Prsr LexState Token a

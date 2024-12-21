@@ -3,7 +3,7 @@ module MicroHs.Builtin(
   mkBuiltin,
   ) where
 import Prelude(); import MHSPrelude
-import MicroHs.Ident
+import Language.MicroHs.Ident
 
 -- The compiler needs a number of identifiers from libraries.
 -- These are make available by (programatically) adding

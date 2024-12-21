@@ -12,8 +12,8 @@ module MicroHs.Exp(
 import Prelude(); import MHSPrelude hiding((<>))
 import Data.Char
 import Data.List
-import MicroHs.Ident
-import MicroHs.Expr(Lit(..), showLit)
+import Language.MicroHs.Ident
+import Language.MicroHs.Expr(Lit(..), showLit)
 import MicroHs.List
 import Text.PrettyPrint.HughesPJLite
 import Debug.Trace
@@ -94,4 +94,3 @@ lams xs e = foldr Lam e xs
 
 apps :: Exp -> [Exp] -> Exp
 apps f = foldl App f
-

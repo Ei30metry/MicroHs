@@ -8,8 +8,8 @@ module MicroHs.CompileCache(
   ) where
 import Prelude(); import MHSPrelude
 import MicroHs.Desugar(LDef)
-import MicroHs.Expr(IdentModule)
-import MicroHs.Ident(showIdent)
+import Language.MicroHs.Expr(IdentModule)
+import Language.MicroHs.Ident(showIdent)
 import qualified MicroHs.IdentMap as M
 import MicroHs.Package
 import MicroHs.TypeCheck(TModule, tModuleName, GlobTables, emptyGlobTables, mergeGlobTables)

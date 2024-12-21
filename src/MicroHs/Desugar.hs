@@ -17,11 +17,11 @@ import Debug.Trace
 import GHC.Stack
 
 import MicroHs.EncodeData
-import MicroHs.Expr
+import Language.MicroHs.Expr
 import MicroHs.Exp
 import MicroHs.Flags
 import MicroHs.Graph
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import MicroHs.List
 import MicroHs.State as S
 import MicroHs.TypeCheck

@@ -19,13 +19,13 @@ import Control.Applicative
 import Data.List
 import GHC.Stack
 import MicroHs.Builtin(builtinMdl)
-import MicroHs.Expr(Expr(..), EType, conIdent)
-import MicroHs.Ident(Ident, showIdent, unIdent, mkIdentSLoc, slocIdent)
+import Language.MicroHs.Expr(Expr(..), EType, conIdent)
+import Language.MicroHs.Ident(Ident, showIdent, unIdent, mkIdentSLoc, slocIdent)
 import MicroHs.List
 import qualified MicroHs.IdentMap as M
 
 -- Symbol table
--- 
+--
 
 -- Symbol table entry for symbol i.
 data Entry = Entry
@@ -71,7 +71,7 @@ instance Show SymTab where
     ("Locals:"  : map (("  " ++) . show) l) ++
     ("UGlobals:" : map (("  " ++) . show) (M.toList ug)) ++
     ("QGlobals:" : map (("  " ++) . show) (M.toList qg))
-  
+
 mapMSymTab :: forall m . Monad m => (Entry -> m Entry) -> SymTab -> m SymTab
 mapMSymTab f (SymTab l ug qg) = do
   l' <- mapM (\ (i, a) -> (,) i <$> f a) l

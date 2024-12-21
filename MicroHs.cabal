@@ -71,22 +71,22 @@ executable mhs
                        MicroHs.EncodeData
                        MicroHs.Exp
                        MicroHs.ExpPrint
-                       MicroHs.Expr
+                       Language.MicroHs.Expr
                        MicroHs.FFI
                        MicroHs.Flags
                        MicroHs.Fixity
                        MicroHs.Graph
-                       MicroHs.Ident
+                       Language.MicroHs.Ident
                        MicroHs.IdentMap
                        MicroHs.IntMap
                        MicroHs.IntSet
                        MicroHs.Instances
                        MicroHs.Interactive
-                       MicroHs.Lex
+                       Language.MicroHs.Lex
                        MicroHs.List
                        MicroHs.MakeCArray
                        MicroHs.Package
-                       MicroHs.Parse
+                       Language.MicroHs.Parse
                        MicroHs.State
                        MicroHs.StateIO
                        MicroHs.SymTab

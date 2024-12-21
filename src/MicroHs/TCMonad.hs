@@ -9,8 +9,8 @@ import GHC.Stack
 import Control.Applicative
 import Data.Functor
 import Data.List(nub)
-import MicroHs.Expr
-import MicroHs.Ident
+import Language.MicroHs.Expr
+import Language.MicroHs.Ident
 import qualified MicroHs.IdentMap as M
 import qualified MicroHs.IntMap as IM
 import MicroHs.State
@@ -104,7 +104,7 @@ data TCState = TC {
                   MetaTable,            -- instances with unification variables
                   TypeEqTable,          -- type equalities
                   ArgDicts              -- dictionary arguments
-                 ),             
+                 ),
   constraints :: Constraints,           -- constraints that have to be solved
   defaults    :: Defaults               -- current defaults
   }

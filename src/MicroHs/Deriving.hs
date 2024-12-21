@@ -4,8 +4,8 @@ import Data.Char
 import Data.Function
 import Data.List
 import MicroHs.Builtin
-import MicroHs.Expr
-import MicroHs.Ident
+import Language.MicroHs.Expr
+import Language.MicroHs.Ident
 import MicroHs.TCMonad
 import Debug.Trace
 
@@ -334,4 +334,3 @@ derRead mctx lhs cs eread = do
   return [inst]
 
 --------------------------------------------
-

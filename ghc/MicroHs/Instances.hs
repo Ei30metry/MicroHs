@@ -3,9 +3,9 @@
 module MicroHs.Instances(compiledWithGHC) where
 import Control.DeepSeq
 import MicroHs.CompileCache
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import MicroHs.Exp
-import MicroHs.Expr
+import Language.MicroHs.Expr
 
 instance NFData Cache where rnf _ = ()
 

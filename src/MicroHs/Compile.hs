@@ -31,13 +31,13 @@ import MicroHs.Builtin
 import MicroHs.CompileCache
 import MicroHs.Desugar
 import MicroHs.Exp
-import MicroHs.Expr
+import Language.MicroHs.Expr
 import MicroHs.Flags
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import qualified MicroHs.IdentMap as M
 import MicroHs.List
 import MicroHs.Package
-import MicroHs.Parse
+import Language.MicroHs.Parse
 import MicroHs.StateIO
 import MicroHs.SymTab
 import MicroHs.TypeCheck
@@ -186,7 +186,7 @@ compileModule flags impt mn pathfn file = do
   when (verbosityGT flags 4) $
     liftIO $ putStrLn $ "parsed:\n" ++ show pmdl
   let mdl@(EModule mnn _ defs) = addPreludeImport pmdl
-  
+
   -- liftIO $ putStrLn $ showEModule mdl
   -- liftIO $ putStrLn $ showEDefs defs
   -- TODO: skip test when mn is a file name

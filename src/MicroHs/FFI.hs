@@ -4,8 +4,8 @@ import Data.Function
 import Data.List
 import MicroHs.Desugar(LDef)
 import MicroHs.Exp
-import MicroHs.Expr
-import MicroHs.Ident
+import Language.MicroHs.Expr
+import Language.MicroHs.Ident
 import MicroHs.Flags
 
 makeFFI :: Flags -> [LDef] -> String
@@ -174,7 +174,7 @@ runtimeFFI :: [String]
 runtimeFFI = [
   "GETRAW", "GETTIMEMILLI", "acos", "add_FILE", "add_utf8", "asin", "atan", "atan2", "calloc", "closeb",
   "cos", "exp", "flushb", "fopen", "free", "getb", "getenv", "iswindows", "log", "malloc",
-  "md5Array", "md5BFILE", "md5String", "memcpy", "memmove", 
+  "md5Array", "md5BFILE", "md5String", "memcpy", "memmove",
   "putb", "sin", "sqrt", "system", "tan", "tmpname", "ungetb", "unlink",
   "peekPtr", "pokePtr", "pokeWord", "peekWord",
   "add_lz77_compressor", "add_lz77_decompressor",

@@ -25,10 +25,10 @@ import Data.List
 import Data.Maybe
 import MicroHs.Builtin
 import MicroHs.Deriving
-import MicroHs.Expr
+import Language.MicroHs.Expr
 import MicroHs.Fixity
 import MicroHs.Graph
-import MicroHs.Ident
+import Language.MicroHs.Ident
 import qualified MicroHs.IdentMap as M
 import qualified MicroHs.IntMap as IM
 import MicroHs.List
@@ -298,7 +298,7 @@ mkTModule impt tds tcs =
         Right e -> e
         _       -> impossible
           -- error $ show (qualIdent mn i, M.toList tt)
-          
+
     -- Find all value Entry for names associated with a type.
     assoc i = case impt of
                 ImpBoot -> []  -- XXX For boot files the tables are not set up correctly.
@@ -348,7 +348,7 @@ mkTCState mdlName globs mdls =
           [ (v, [Entry (EVar v) t]) | (i, ClassInfo _ _ t _ _) <- M.toList (gClassTable globs), let { v = mkClassConstructor i } ]
         -- Default methods are always entered with their qualified original name.
         qualIdentD (Entry e _) m i | not (isDefaultMethodId i) = qualIdent m i
-                                   | otherwise = 
+                                   | otherwise =
                                      case e of
                                        EVar qi -> qi
                                        _ -> undefined
@@ -446,7 +446,7 @@ withTypeTable ta = do
   putTypeTable tt'
   putTCMode otcm
   return a
-  
+
 addAssocTable :: Ident -> [Ident] -> T ()
 addAssocTable i ids = modify $ \ ts -> ts { assocTable = M.insert i ids (assocTable ts) }
 
@@ -1051,7 +1051,7 @@ addTypeKind kdefs adef = do
            Nothing -> newUVar
            Just k' -> return k'
       extValQTop i k
-      
+
   case adef of
     Data    lhs@(i, _) cs _ -> do
       addDef lhs
@@ -1189,7 +1189,7 @@ expandClass impt dcls@(Class ctx (iCls, vks) fds ms) = do
                       def (Just eqns) = Fcn iDflt eqns
                       iDflt = mkDefaultMethodId methId
                       noDflt = mkExn (getSLoc methId) (unIdent methId) "noMethodError"
-              
+
       mkDflt _ = impossible
       dDflts = case impt of
                  ImpNormal -> concatMap mkDflt meths
@@ -1659,7 +1659,7 @@ tcExprR mt ae =
                 ithen = mkBuiltin loc ">>"
                 sthen = maybe ithen (\ mn -> qualIdent mn ithen) mmn
               tcExpr mt (EApp (EApp (EVar sthen) a) (EDo mmn ss))
-                
+
             SLet bs ->
               tcExpr mt (ELet bs (EDo mmn ss))
 
@@ -1768,7 +1768,7 @@ failureFreeAp bs (EVar v) | not (isConIdent v) = return True
                                 _ -> False
 failureFreeAp bs (ESign p _) = failureFreeAp bs p
 failureFreeAp _ _ = return False  -- bad pattern, just ignore
-                           
+
 eSetFields :: EField -> Expr -> Expr
 eSetFields (EField is e) r =
   let loc = getSLoc is
@@ -2160,7 +2160,7 @@ tcPat mt ae =
     EUpdate p [] -> do
       (p', _) <- tInferExpr p
       case p' of
-        ECon c -> tcPat mt $ eApps p (replicate (conArity c) (EVar dummyIdent))          
+        ECon c -> tcPat mt $ eApps p (replicate (conArity c) (EVar dummyIdent))
         _      -> impossible
     EUpdate p isps -> do
       me <- dsUpdate (const $ EVar dummyIdent) p isps
@@ -2198,7 +2198,7 @@ tcPatAp mt args afn =
           Just (ctx, pt') -> do
             di <- newADictIdent loc
             return ([(di, ctx)], EApp con (EVar di), pt')
-          
+
       let ary = arity pf
             where arity (ECon c) = conArity c
                   arity (EApp f _) = arity f - 1  -- deal with dictionary added above
@@ -2228,7 +2228,7 @@ tcPatAp mt args afn =
     EParen e -> tcPatAp mt args e
 
     _ -> tcError (getSLoc afn) ("Bad pattern " ++ show afn)
-  
+
 
 eTrue :: SLoc -> Expr
 eTrue l = EVar $ mkBuiltin l "True"
@@ -2484,7 +2484,7 @@ expandDict' avks actx edict acc = do
             error ("expandDict: " ++ show iCls)
           return [(edict, vks, ctx, cc, [])]
         Just (ClassInfo iks sups _ _ fds) -> do
-          let 
+          let
             vs = map idKindIdent iks
             sub = zip vs args
             sups' = map (subst sub) sups
