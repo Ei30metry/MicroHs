@@ -23,7 +23,7 @@ GHCFLAGS= $(GHCEXTS) $(GHCINCS) $(GHCWARNS) $(GHCOPTS) $(GHCTOOL) $(GHCPKGS) $(G
 EMCC=emcc -sALLOW_MEMORY_GROWTH -sTOTAL_STACK=5MB -sNODERAWFS -sSINGLE_FILE -DUSE_SYSTEM_RAW
 #
 MHSINCNP= -i -imhs -isrc -ilib
-MHSINC=$(MHSINCNP) -ipaths 
+MHSINC=$(MHSINCNP) -ipaths
 #
 .PHONY:	clean bootstrap install ghcgen newmhs newmhsz cachelib timecompile exampletest cachetest runtest runtestmhs everytest everytestmhs nfibtest info
 
@@ -89,7 +89,7 @@ generated/mhs.c:	bin/mhs src/*/*.hs
 	@mkdir -p generated
 	bin/mhs -z $(MHSINC) MicroHs.Main -ogenerated/mhs.c
 
-ghcgen:	bin/gmhs src/*/*.hs lib/*.hs lib/*/*.hs lib/*/*/*.hs
+ghcgen:	bin/gmhs src/*/*.hs MicroHslib/*.hs MicroHs-lib/*/*.hs MicroHs-lib/*/*/*.hs
 	bin/gmhs $(MHSINC) MicroHs.Main -ogenerated/mhs.c
 
 #
@@ -104,7 +104,7 @@ mhs.js:	src/*/*.hs src/runtime/*.[ch] targets.conf
 bootstrap:	bin/mhs-stage2
 	@echo "*** copy stage2 to bin/mhs"
 	cp bin/mhs-stage2 bin/mhs
-	cp generated/mhs-stage2.c generated/mhs.c 
+	cp generated/mhs-stage2.c generated/mhs.c
 
 # Build stage1 compiler with existing compiler
 bin/mhs-stage1:	bin/mhs src/*/*.hs
@@ -176,7 +176,7 @@ oldinstall:
 	cp bin/mhs $(PREFIX)/bin
 	-cp bin/cpphs $(PREFIX)/bin
 	mkdir -p $(PREFIX)/lib/mhs/src/runtime
-	cp -r lib $(PREFIX)/lib/mhs
+	cp -r MicroHs-lib $(PREFIX)/lib/mhs
 	cp src/runtime/* $(PREFIX)/lib/mhs/src/runtime
 	cp targets.conf $(PREFIX)/lib/mhs/targets.conf
 	@echo "***"
@@ -241,7 +241,7 @@ $(MCABALBIN)/mcabal: bin/mcabal
 	@mkdir -p $(MCABALBIN)
 	cp bin/mcabal $(MCABALBIN)
 
-$(MCABALMHS)/packages/$(BASE).pkg: bin/mhs lib/*.hs lib/*/*.hs lib/*/*/*.hs
+$(MCABALMHS)/packages/$(BASE).pkg: bin/mhs MicroHs-lib/*.hs MicroHs-lib/*/*.hs MicroHs-lib/*/*/*.hs
 	bin/mhs -P$(BASE) -o$(BASE).pkg -ilib $(BASEMODULES)
 	bin/mhs -Q $(BASE).pkg $(MCABALMHS)
 	@rm $(BASE).pkg
@@ -257,6 +257,6 @@ preparedist:	newmhsz bootstrapcpphs
 
 minstall:	bin/cpphs bin/mcabal $(MCABALBIN)/mhs
 	cp bin/cpphs bin/mcabal $(MCABALBIN)
-	cd lib; PATH=$(MCABALBIN):"$$PATH" mcabal install
+	cd MicroHs-lib; PATH=$(MCABALBIN):"$$PATH" mcabal install
 	PATH=$(MCABALBIN):"$$PATH" mcabal install
 	@echo $$PATH | tr ':' '\012' | grep -q $(MCABALBIN) || echo '***' Add $(MCABALBIN) to the PATH
