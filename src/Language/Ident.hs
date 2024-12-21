@@ -1,6 +1,6 @@
 -- Copyright 2023 Lennart Augustsson
 -- See LICENSE file for full license.
-module MicroHs.Ident(
+module Language.MicroHs.Ident(
   Line, Col,
   Ident,
   mkIdent, unIdent, isIdent,

@@ -6,8 +6,8 @@ import Data.Maybe
 import MicroHs.Desugar(LDef)
 import MicroHs.EncodeData(encList)
 import MicroHs.Exp
-import MicroHs.Expr(Lit(..), showLit, errorMessage, HasLoc(..))
-import MicroHs.Ident(Ident, showIdent, mkIdent)
+import Language.MicroHs.Expr(Lit(..), showLit, errorMessage, HasLoc(..))
+import Language.MicroHs.Ident(Ident, showIdent, mkIdent)
 import MicroHs.State
 
 -- Version number of combinator file.

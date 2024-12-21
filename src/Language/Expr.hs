@@ -1,4 +1,4 @@
-module MicroHs.Expr(
+module Language.MicroHs.Expr(
   IdentModule,
   EModule(..),
   ExportItem(..),
@@ -867,7 +867,7 @@ getArrow (EApp (EApp (EVar n) a) b) =
 getArrow _ = Nothing
 
 getArrows :: EType -> ([EType], EType)
-getArrows at = 
+getArrows at =
   case getArrow at of
     Nothing -> ([], at)
     Just (t, r) -> first (t:) (getArrows r)
@@ -920,4 +920,3 @@ getImplies :: EType -> Maybe (EType, EType)
 getImplies (EApp (EApp (EVar n) a) b) =
   if isIdent "=>" n || isIdent "Primitives.=>" n then Just (a, b) else Nothing
 getImplies _ = Nothing
-

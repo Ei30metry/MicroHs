@@ -27,8 +27,8 @@ extra-source-files:
       generated/mhs.c
       generated/cpphs.c
       ghc/**/*.hs
-      lib/**/*.hs
-      lib/**/*.hs-boot
+      MicroHs-lib/**/*.hs
+      MicroHs-lib/**/*.hs-boot
       mhs/**/*.hs
       paths/Paths_MicroHs.hs
       src/runtime/*.c
@@ -42,8 +42,8 @@ data-files:
       src/runtime/*.c
       src/runtime/*.h
 -- I would like to have these two only for ghc, but I can't figure out how.
-      lib/**/*.hs           --NOT_MHS
-      lib/**/*.hs-boot      --NOT_MHS
+      MicroHs-lib/**/*.hs           --NOT_MHS
+      MicroHs-lib/**/*.hs-boot      --NOT_MHS
 
 -- These files must not be installed for mhs!
 -- Cabal doesn't seem to understand this, so it never copies
@@ -123,4 +123,3 @@ executable mhs
   if impl(mhs)
     hs-source-dirs:    mhs src
     build-depends:     base         >= 0.1 && < 10.0,
-

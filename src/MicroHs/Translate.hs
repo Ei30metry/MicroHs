@@ -10,10 +10,10 @@ import Unsafe.Coerce
 import PrimTable
 
 import MicroHs.Desugar(LDef, encodeInteger)
-import MicroHs.Expr
+import Language.MicroHs.Expr
 import MicroHs.Exp
 import MicroHs.ExpPrint(encodeString)
-import MicroHs.Ident
+import Language.MicroHs.Ident
 
 translateAndRun :: (Ident, [LDef]) -> IO ()
 translateAndRun defs = do

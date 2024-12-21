@@ -1,7 +1,7 @@
 -- Copyright 2023 Lennart Augustsson
 -- See LICENSE file for full license.
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns -Wno-unused-do-bind #-}
-module MicroHs.Parse(P, pTop, pTopModule, parseDie, parse, pExprTop, keywords) where
+module Language.MicroHs.Parse(P, pTop, pTopModule, parseDie, parse, pExprTop, keywords) where
 import Prelude(); import MHSPrelude
 import Control.Applicative
 import Control.Monad
@@ -104,7 +104,7 @@ pUIdentSpecial = do
   loc <- getSLoc
   let
     mk = mkIdentSLoc loc
-  
+
   (mk . map (const ',') <$> (pSpec '(' *> esome (pSpec ',') <* pSpec ')'))
     <|< (mk "[]" <$ (pSpec '[' *> pSpec ']'))  -- Allow [] as a constructor name
 
@@ -601,7 +601,7 @@ pAlts sep = do
   alts <- pAltsL sep
   bs <- pWhere pBind
   pure (EAlts alts bs)
-  
+
 pAltsL :: P () -> P [EAlt]
 pAltsL sep =
       esome (pAlt sep)
@@ -763,19 +763,19 @@ pOperators' oper one = eOper <$> one <*> emany ((,) <$> oper <*> one)
 -- Bindings
 
 pBind :: P EBind
-pBind = 
+pBind =
       BPat <$> pPatNotVar <*> ((pSpec '=' *> pExpr)
                            <|< (EMultiIf <$> pAlts (pSpec '=')))
   <|< pClsBind
 
 pClsBind :: P EBind
-pClsBind = 
+pClsBind =
       uncurry BFcn <$> pEqns
   <|< BSign        <$> ((esepBy1 pLIdentSym (pSpec ',')) <* dcolon) <*> pType
   <|< BDfltSign    <$> (pKeyword "default" *> pLIdentSym <* dcolon) <*> pType
 
 pInstBind :: P EBind
-pInstBind = 
+pInstBind =
       uncurry BFcn <$> pEqns
 -- no InstanceSig yet  <|< BSign        <$> (pLIdentSym <* dcolon) <*> pType
 
